@@ -12,25 +12,48 @@ var theDate = new Date();
 
 // function
 
+function completeItem(e, code) { // no :9
+
+    for(var i = 0; i < arr.length; i++){
+        if(arr[i].id == code){
+
+            e.target.previousElementSibling.previousElementSibling.previousElementSibling.style.textDecoration = 'line-through';
+            
+            e.target.previousElementSibling.previousElementSibling.style.display="none";
+            e.target.style.display="none";
+        }
+    }
+}
+
 function deleteItem(e, id) { // no :8
     console.log(e.target);
     console.log(id)
+
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i].id == id) {
+            console.log(delete true);
+            e.target.parentNode.remove()
+            console.log(e.target.parentNode)
+        }
+    }
 }
 
 function updataItem(e, check) { // no :7
     var editInp = e.target.previousElementSibling.previousElementSibling.value;
     console.log(e.target);
-    // console.log(check);
+    console.log(check);
 
-    for(var = 0)
-
-    for(var i = 0; i < arr.length; i++){
-        if(arr[i].id == check){
-            arr[i] = [...arr[i], listText = editInp]
-            console.log(true)
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i].id == check) {
+            // arr[i] = [...arr[i], listText = editInp]
+            e.target.previousElementSibling.previousElementSibling.style.display = "none";
+            e.target.previousElementSibling.style.display = "block";
+            e.target.previousElementSibling.innerText = editInp;
+            e.target.innerText = "edit";
+            e.target.nextElementSibling.style.display = "block";
         }
-        else{
-            arr[i] = [...arr[i]];
+        else {
+            // arr[i] = [...arr[i]];
         }
     }
 }
@@ -41,6 +64,7 @@ function editItem(e, id) { // no :6
     console.log(id);
     e.target.previousElementSibling.style.display = "none";
     e.target.previousElementSibling.previousElementSibling.style.display = "block";
+    e.target.nextElementSibling.style.display = "none";
     e.target.innerHTML = "Save";
     e.target.setAttribute('onClick', `updataItem(event, '${id}')`)
 }
@@ -48,11 +72,12 @@ function editItem(e, id) { // no :6
 function renderListItem() { // no :5
 
     for (var i = 0; i < arr.length; i++) {
-        box.innerHTML += `<div class="list-Div">
+        box.innerHTML += `<div class="list-Div" id="">
         <input type="text" value="${arr[i].listText}" class="editInputBtn">
         <p>${arr[i].listText}</p>
         <button onClick="editItem(event, '${arr[i].id}')">edit</button>
-        <button onClick="deleteItem(event, '${arr[i].id}')"><i class="fa-solid fa-trash"></i></button>
+        <button onClick="deleteItem(event, '${arr[i].id}')">Del</button>
+        <button onClick="completeItem(event, '${arr[i].id}')">Complete</button>
         </div>`;
     }
 }
@@ -86,4 +111,4 @@ function submitInput(e) { // no :1,
     inp.value = "";
 }
 
-// localStorage.clear()
+// localStorage.removeItem("To_Do Item");
